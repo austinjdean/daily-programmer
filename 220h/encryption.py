@@ -3,12 +3,28 @@
 import sys
 
 def decrypt(message, keys):
-	print message
-	print keys
-
-def main():
 	wlLocation = '/home/adean/wordlists/github-wordlist'
 	wordlist = open(wlLocation)
+
+	indexList = []
+
+	messageWords = message.split(' ')
+	for word in messageWords:
+		unit = ['', []] # prepare for adding word and relevant indices
+		for index, letter in enumerate(word):
+			for key in keys:
+				decrypted = key[0]
+				encrypted = key[1]
+				if letter.lower() == encrypted.lower():
+					word = word.replace(letter, decrypted)
+					unit[1].append(index)
+		unit[0] = word
+		indexList.append(unit)
+
+	for item in indexList:
+		print item, # apparently adding a comma there prints it all on the same line. who knew.
+
+def main():
 	keys = []
 
 	try:
@@ -17,12 +33,8 @@ def main():
 		print 'You must provide an encrypted message.'
 		exit(1)
 
-	try:
-		for arg in sys.argv[2:]:
-			keys.append(arg)
-	except:
-		print 'Problem with the keys.'
-		exit(1)
+	for arg in sys.argv[2:]:
+		keys.append(arg)
 
 	decrypt(message, keys)
 
