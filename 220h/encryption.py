@@ -3,8 +3,12 @@
 import sys
 
 def decrypt(message, keys):
-	wlLocation = '/home/adean/wordlists/github-wordlist'
-	wordlist = open(wlLocation)
+	wlLocation = '/home/adean/git/wordlists/github-wordlist'
+	wordFile = open(wlLocation)
+	wordlist = []
+
+	for entry in wordFile:
+		wordlist.append(entry[:-1])
 
 	indexList = []
 
@@ -21,8 +25,18 @@ def decrypt(message, keys):
 		unit[0] = word
 		indexList.append(unit)
 
+	wordsWithHints = []
+
 	for item in indexList:
-		print item[0], # apparently adding a comma there prints it all on the same line. who knew.
+		wordsWithHints.append(item[0])
+
+	count = 0
+
+	for entry in wordlist:
+		for word in wordsWithHints:
+			if len(word) == len(entry):
+				count += 1
+	print count
 
 def main():
 	keys = []
