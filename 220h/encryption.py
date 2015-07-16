@@ -22,7 +22,7 @@ def decrypt(message, keys):
 		indexList.append(unit)
 
 	for item in indexList:
-		print item, # apparently adding a comma there prints it all on the same line. who knew.
+		print item[0], # apparently adding a comma there prints it all on the same line. who knew.
 
 def main():
 	keys = []
