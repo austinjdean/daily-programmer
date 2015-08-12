@@ -32,11 +32,17 @@ def decrypt(message, keys):
 
 	count = 0
 
-	for entry in wordlist:
-		for word in wordsWithHints:
-			if len(word) == len(entry):
-				count += 1
-	print count
+	for word in indexList:
+		for entry in wordlist:
+			if len(word[0]) == len(entry):
+				# count += 1
+				for ind in word[1]:
+					if entry[ind] == word[0][ind]:
+						print entry
+		# print count
+		# count = 0
+
+	print indexList
 
 def main():
 	keys = []
